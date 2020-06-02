@@ -1,0 +1,18 @@
+<!Doctype HTML>
+<HTML>
+<HEAD>
+    <title>Story Title</title>
+</HEAD>
+<body>
+<div>
+    <form action="/new-story/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</HTML>
+
+
+
