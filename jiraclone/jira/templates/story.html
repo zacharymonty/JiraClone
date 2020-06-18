@@ -7,7 +7,11 @@
 <div>
     <form action="/new-story/" method="post">
         {% csrf_token %}
-        {{ form }}
+        {% for field in form %}
+            {{ field.label }}
+            {{ field }}
+            </br>
+        {% endfor %}
         <input type="submit" value="Submit">
     </form>
 </div>
