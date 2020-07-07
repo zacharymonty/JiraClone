@@ -13,18 +13,18 @@ class Story(models.Model):
     date_created = models.DateField(auto_now=True)
     due_date = models.DateField(auto_now=False)
     type = models.CharField(max_length=30, choices=TYPE_CHOICES, default="BUG")
-    assignee = models.ForeignKey('User', on_delete=models.CASCADE)
+    assignee = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
 
-    def save(self, *args, **kwargs):
-        self.title = kwargs['title']
-        self.description = kwargs['description']
-        self.status = kwargs['status']
-        self.due_date = kwargs['due_date']
-        self.type = kwargs['type']
-        self.points = kwargs['points']
-
-        story_id = 'DEV-' + str(self.id)
-        self.story_id = story_id
+    # def save(self, *args, **kwargs):
+    #     self.title = kwargs['title']
+    #     self.description = kwargs['description']
+    #     self.status = kwargs['status']
+    #     self.due_date = kwargs['due_date']
+    #     self.type = kwargs['type']
+    #     self.points = kwargs['points']
+    #
+    #     story_id = 'DEV-' + str(self.id)
+    #     self.story_id = story_id
 
 class User(models.Model):
     username = models.CharField(max_length=30)
