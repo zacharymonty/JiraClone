@@ -6,6 +6,15 @@
 <body>
 <div>
     <h1>Stories</h1>
+
+    <h2>{{ Stories.title }}</h2>
+
+    {% for story in stories %}
+        <a href="{% url 'story_detail' story_id=story.id %}">
+        {{ story.title }}
+        </br>
+        </a>
+    {% endfor %}
 </div>
 </body>
 </HTML>

@@ -6,16 +6,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .models import Story
 import logging
 
+Story = Story
 
 logger = logging.getLogger(__name__)
 
 class HomeView(View):
     template_name = 'home.html'
 
-    def get(self, request, *args, **kwargs):
-        return render(request, "home.html")
 
-class StoryView(FormView):
+    def get(self, request, *args, **kwargs):
+        stories = Story.objects.all()
+        # stories = stories.__dict__
+        return render(request, "home.html", {"stories": stories})
+
+class NewStoryView(FormView):
     template_name = 'story.html'
     form_class = StoryForm
     initial = {"key": "value"}
@@ -39,8 +43,16 @@ class StoryView(FormView):
 
             form.save()
 
-            return HttpResponseRedirect("/success/")
+            return HttpResponseRedirect("/")
         else:
             logger.info("Form is invalid")
 
+
         return render(request, self.template_name, {"form": form})
+
+class StoryView(View):
+    template_name = 'story_detail.html'
+
+    def get(self, request, story_id):
+        story = Story.objects.get(id=story_id)
+        return render(request, self.template_name, {"story": story})

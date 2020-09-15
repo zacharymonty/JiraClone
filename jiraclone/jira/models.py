@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Story(models.Model):
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=255)
@@ -25,6 +26,7 @@ class Story(models.Model):
     #
     #     story_id = 'DEV-' + str(self.id)
     #     self.story_id = story_id
+
 
 class User(models.Model):
     username = models.CharField(max_length=30)
